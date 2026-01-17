@@ -24,17 +24,16 @@ export default function Dashboard() {
   const [editName, setEditName] = useState("");
   const [editDescription, setEditDescription] = useState("");
 
-  // Auth listener
+
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, user => {
       setCurrentUser(user);
-      // Ako korisnik nije ulogovan, vrati na početnu
       if (!user) navigate("/");
     });
     return () => unsub();
   }, [navigate]);
 
-  // Firestore realtime fetch
+
   useEffect(() => {
     const q = query(collection(db, "items"), orderBy("createdAt", "desc"));
     const unsub = onSnapshot(q, snap => {
@@ -71,10 +70,10 @@ export default function Dashboard() {
     setIsEditing(false);
   };
 
-  // ✅ Logout funkcija sa navigate
+
   const handleLogout = async () => {
     await auth.signOut();
-    navigate("/"); // Preusmeravanje na Home
+    navigate("/"); 
   };
 
   return (
@@ -86,11 +85,11 @@ export default function Dashboard() {
         <button onClick={handleLogout}>Logout</button>
       </div>
 
-      {/* GRID */}
+      {}
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)", // 5 po redu
+          gridTemplateColumns: "repeat(5, 1fr)", 
           gap: "20px",
           padding: "0 30px",
           marginTop: "20px"
@@ -127,7 +126,7 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* MODAL */}
+      {}
       {selectedItem && (
         <div style={overlay}>
           <div style={modal}>

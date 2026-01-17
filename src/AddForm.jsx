@@ -20,20 +20,20 @@ export default function AddForm() {
       setLoading(true);
       const user = auth.currentUser;
 
-      // 🔹 STORAGE PATH
+
       const storagePath = `users/${user.uid}/${Date.now()}_${file.name}`;
       const storageRef = ref(storage, storagePath);
 
       await uploadBytes(storageRef, file);
       const imageUrl = await getDownloadURL(storageRef);
 
-      // 🔹 FIRESTORE
+
       await addDoc(collection(db, "items"), {
         uid: user.uid,
         name,
         description,
         imageUrl,
-        storagePath, // ⬅⬅⬅ KLJUČNO
+        storagePath, 
         createdAt: serverTimestamp()
       });
 
